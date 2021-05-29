@@ -1,34 +1,14 @@
 const express = require('express'); 
+const notesController = require('../controllers/notes'); 
 const router = express.Router(); 
 
-// Get a specific note
-router.get('/:id', (req, res)=> {
-    res.status(200).json({
-        success: true,
-        msg: `Displaying note with id ${req.params.id}`
-    })
-}); 
-
-// Create a new note 
-router.post('/', (req, res)=> {
-    res.status(200).json({
-        success: true,
-        msg: `Added new note!`
-    })
-})
-
-router.put('/:id', (req, res)=> {
-    res.status(200).json({
-        success: true,
-        msg: `Updated note with id ${req.params.id}`
-    })
-})
-
-router.delete('/:id', (req, res)=> {
-    res.status(200).json({
-        success: true,
-        msg: `Delete note with id ${req.params.id}`
-    })
-})
+router.get('/:id', notesController.getNote);
+router.post('/', notesController.createNote); 
+router.put('/:id', notesController.updateNote); 
+router.delete('/:id', notesController.deleteNote); 
 
 module.exports = router; 
+
+/* 
+    If you have more than one .get() method, then you have to put the more specific paths before the more generic paths 
+*/
