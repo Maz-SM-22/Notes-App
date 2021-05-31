@@ -1,5 +1,5 @@
 exports.displayAllNotes = (req, res, next)=> {
-    res.status(200).json({
+    res.render('partials/notes.hbs', {
         success: true,
         notes: [
             {

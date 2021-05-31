@@ -3,8 +3,8 @@
 }
 
 body {
-    background-image: url(https://unsplash.com/photos/-H7VI0q9nn0?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink);
-    background-position: center;
+    background-image: url(../images/johannes-plenio-qkfxBc2NQ18-unsplash.jpg);
+    background-attachment: fixed;
     font-family: sans-serif;
     text-align: center;
     margin: auto;
@@ -14,4 +14,16 @@ body {
     background-color: rgba(255, 255, 255, 0.4);
     color: black; 
     display: flex;
+    margin: 70px; 
+}
+
+.note > img {
+    max-height: 300px;
+    max-width: 300px;
+}
+
+button {
+    border: none; 
+    border-radius: 50%; 
+    
 }

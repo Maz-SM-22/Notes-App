@@ -2,13 +2,24 @@
 <html lang="en">
 <head>
     <title>Tea Notes</title>
-    <link rel="stylesheet" href="stylesheet/styles.css" />
+    <link rel="stylesheet" href="../stylesheet/styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body class="main">
     {{{body}}}
+    <form id="mainForm" method="GET"></form>
 </body>
+<footer>
+    Photo by <a href="https://unsplash.com/@jplenio?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Johannes Plenio</a> on <a href="https://unsplash.com/s/photos/sunset?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+</footer>
+<script>
+    function updateNote(id) {
+        $("#mainForm").attr("action", `/notes/${id}`);
+        $("#mainForm").submit();
+    }
+    function createNote() {
+        $("#mainForm").attr("action", '/view/create');
+        $("#mainForm").submit();
+    }
+</script>
 </html>
-
-
-<!--Layout is for the page layout-->
-<!--Notes is for the formatting of the notes-->

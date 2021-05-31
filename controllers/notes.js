@@ -1,10 +1,21 @@
 // Dunno if we need to import anything first 
 // Maybe import notes 
 
+// exports.getNote = (req, res, next)=> {
+//     res.status(200).json({
+//         success: true,
+//         msg: `Displaying note with id ${req.params.id}`
+//     })
+// }
+
 exports.getNote = (req, res, next)=> {
-    res.status(200).json({
-        success: true,
-        msg: `Displaying note with id ${req.params.id}`
+    res.render('partials/edit.hbs', {
+        id: 6451, 
+        title: '', 
+        image: '',
+        components: [''],
+        category: '',
+        review: ''
     })
 }
 

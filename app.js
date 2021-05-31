@@ -2,7 +2,7 @@
 const express = require('express'); 
 const dotenv = require('dotenv'); 
 const path = require('path'); 
-const hbs = require('express-handlebars'); 
+const exphbs = require('express-handlebars'); 
 const app = express(); 
 
 // Importing and setting up config
@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Set up the template engine
 // Describe the characteristics of the engine 
-app.engine('hbs', hbs({
+app.engine('hbs', exphbs({
     defaultLayout: 'layout',
     extname: '.hbs', 
     runtimeOptions: {
@@ -25,18 +25,15 @@ app.engine('hbs', hbs({
 
 app.set('view engine', 'hbs'); 
 
-// Do I need this? 
-app.get('/', (req, res)=> {
-    res.render('/layout.hbs', {}); 
-})
-
 // Import & define routers 
 const routeUser = require('./routes/user'); 
 const routeNotes = require('./routes/notes'); 
+const routeViews = require('./routes/views'); 
 
 // Mount routers 
 app.use('/user', routeUser); 
 app.use('/notes', routeNotes); 
+app.use('/view', routeViews); 
 
 // Static files
 const publicPath = path.resolve(__dirname,'public'); 
