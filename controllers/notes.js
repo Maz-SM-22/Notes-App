@@ -12,10 +12,14 @@ exports.getNote = (req, res, next)=> {
 }
 
 exports.createNote = (req, res, next)=> {
-    let note = new Note(req.body); 
-//    note.title = req.body.title; 
-    note.save(); 
-    res.render('partials/create.hbs')
+    let note = new Note(req.body);          // Need to add some kind of condition to this so that the default note isn't overwritten
+    note.save((err) => {
+        if (err) {
+            next(err); 
+            return; 
+        }
+        res.redirect('/user/notes');        // This still needs editing. Still needs to be related to the user.
+    }); 
 }
 
 exports.updateNote = (req, res, next)=> {
