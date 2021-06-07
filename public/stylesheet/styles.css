@@ -14,16 +14,81 @@ body {
     background-color: rgba(255, 255, 255, 0.4);
     color: black; 
     display: flex;
-    margin: 70px; 
+    margin: 45px; 
+    padding: 20px
+}
+
+.note > * {
+    border: dotted 2px purple; 
 }
 
 .note > img {
-    max-height: 300px;
-    max-width: 300px;
+    max-height: 250px;
+    max-width: 250px;
+    margin-right: 20px;
+    flex-grow: 1;
 }
 
-button {
+.edit, .delete {
     border: none; 
     border-radius: 50%; 
-    
+    height: 50px; 
+    width: 50px;         
+    display: block;
+    flex-grow: 1;
+    text-align: center;
+    margin: auto;
+    margin-top: 15px; 
+    background-color: darkslategrey;
+    color: darkgray;
+}
+
+.edit:hover, .delete:hover {
+    color: peachpuff;
+}
+
+.note-detail {
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+.notes-header {
+    margin: 125px 0 100px 0;
+    font-size: 6rem;
+}
+
+.header-buttons > button {
+    padding: 10px 25px; 
+    font-size: 1.5rem;
+    display: block;
+    width: 265px; 
+    margin: auto;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: none; 
+    background-color: darkslategrey;
+    color: darkgray;
+}
+
+.header-buttons > button:hover {
+    color: darkslateblue;
+    background-color: peachpuff;
+}
+
+footer {
+    margin-bottom: 50px;
+    color: darkslategrey;
+}
+
+footer > a {
+    text-decoration: none;
+    color: darkslategrey;
+}
+
+footer > a:hover {
+    color: peachpuff;
+}
+
+footer > a::after {
+    color: darkslategrey;
 }

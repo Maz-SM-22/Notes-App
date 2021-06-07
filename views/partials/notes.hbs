@@ -1,9 +1,13 @@
-<button class="create" onclick="viewNoteCreated()">Create new note</button>     <!--Maybe this function should be createNote()-->
+<h1 class="notes-header">Notes 📝</h1>
+<div class="header-buttons">
+    <button class="logout" onclick="">Logout</button>
+    <button class="create" onclick="viewNoteCreated()">Create new note</button>     <!--Maybe this function should be createNote()-->
+</div>
 {{#if notes}}
 <ul class="notes-container">
     {{#each notes}}
     <li class="note">
-        <img src={{this.image}} alt="{{this.title}}">
+        <img src={{this.image}} {{#if this.image}}alt="{{this.title}}"{{/if}}>
         <div class="note-detail">
             <h2 class="title">{{this.title}}</h2>
             <p class="components">{{this.components}}</p>

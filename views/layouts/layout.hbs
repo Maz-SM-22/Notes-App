@@ -21,5 +21,9 @@
         $("#mainForm").attr("action", '/view/create');
         $("#mainForm").submit();
     }
+    function deleteNote(id) {
+        $("#mainForm").attr("action", `/notes/${id}`);
+        $("#mainForm").submit();
+    }
 </script>
 </html>
