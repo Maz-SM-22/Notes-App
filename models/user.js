@@ -1,10 +1,6 @@
-// id --> auto-generated (no need to specify this)
-// name --> STRING 
-// email --> STRING (some constraints) unique! Required and should be formatted e.g. user@example.com
-// notes --> ARRAY (one to many) need to bear in mind how you are going to query the data / use the data
-
 const mongoose = require('mongoose'); 
 const Schema = mongoose.Schema; 
+const crypto = require('crypto'); 
 
 const userSchema = new Schema({
     name: String, 
@@ -16,10 +12,21 @@ const userSchema = new Schema({
     },
     notes: [{
         type: Schema.Types.ObjectId, 
-        ref: 'Note'
-//        default: []     // By default the user doesn't have any notes
-    }]
+        ref: 'Note',
+        default: []     // By default the user doesn't have any notes
+    }], 
+    hash: String,
+    salt: String
 })
+
+userSchema.methods.generateHashPassword = (password)=> {
+    this.salt = crypto.randomBytes(16).toString('hex'); 
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 4000, 64, 'SHA512').toString('hex'); 
+};
+userSchema.methods.validatePassword = (password)=> {
+    let hash = crypto.pbkdf2Sync(password, this.salt, 4000, 64, 'SHA512').toString('hex'); 
+    return hash===this.hash;
+};
 
 const User = mongoose.model('User', userSchema); 
 

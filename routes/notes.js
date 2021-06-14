@@ -1,11 +1,12 @@
 const express = require('express'); 
 const notesController = require('../controllers/notes'); 
+const {givePermission} = require('../middleware/authorisation'); 
 const router = express.Router(); 
 
-router.get('/:id', notesController.getNote);
-router.post('/', notesController.createNote); 
-router.put('/:id', notesController.updateNote); 
-router.delete('/:id', notesController.deleteNote); 
+router.get('/:id', givePermission, notesController.getNote);
+router.post('/', givePermission, notesController.createNote); 
+router.put('/:id', givePermission, notesController.updateNote); 
+router.delete('/:id', givePermission, notesController.deleteNote); 
 
 module.exports = router; 
 

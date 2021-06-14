@@ -3,17 +3,36 @@ const express = require('express');
 const dotenv = require('dotenv'); 
 const path = require('path'); 
 const exphbs = require('express-handlebars'); 
-const mongoose = require('mongoose'); 
 // const logger = require('./middleware/logger');
 const morgan = require('morgan'); 
+const session = require('express-session'); 
+const mongoose = require('mongoose'); 
+const MongoStore = require('connect-mongo');
+const passport = require('passport'); 
+require('./config/passport'); 
+const dbConnect = require('./config/dbConfig'); 
 const app = express(); 
 
 // Importing and setting up config
 dotenv.config({path: './config/config.env'});
-const PORT = process.env.PORT; 
+const PORT = process.env.PORT || 3000; 
+const mongoStore = MongoStore.create({ 
+    mongoUrl: process.env.LOCAL_MONGODB_URL, 
+    collection: 'sessions' 
+}); 
 
-const MONGODB_LOCAL = process.env.LOCAL_MONGODB_URL;            // Can extract these to config if you want
-mongoose.connect(MONGODB_LOCAL, { useNewUrlParser: true, useUnifiedTopology: true }); 
+app.set('trust proxy', 1); 
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false, 
+    saveUninitialized: true, 
+    store: mongoStore, 
+    cookie: { maxAge: 86400000 }     // 1 day
+}))
+app.use(passport.initialize()); 
+app.use(passport.session());                // Store the session in the database. Necessary if your app uses persistent login sessions
+
+dbConnect();
 
 // For parsing request bodies
 app.use(express.json()); 
@@ -39,11 +58,13 @@ app.set('view engine', 'hbs');
 const routeUser = require('./routes/user'); 
 const routeNotes = require('./routes/notes'); 
 const routeViews = require('./routes/views'); 
+const routeAuth = require('./routes/auth'); 
 
 // Mount routers 
 app.use('/user', routeUser); 
 app.use('/notes', routeNotes); 
 app.use('/view', routeViews); 
+app.use('/auth', routeAuth); 
 
 // Static files
 const publicPath = path.resolve(__dirname,'public'); 
