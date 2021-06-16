@@ -17,7 +17,7 @@ const app = express();
 dotenv.config({path: './config/config.env'});
 const PORT = process.env.PORT || 3000; 
 const mongoStore = MongoStore.create({ 
-    mongoUrl: process.env.LOCAL_MONGODB_URL, 
+    mongoUrl: process.env.MONGO_URL, 
     collection: 'sessions' 
 }); 
 

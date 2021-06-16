@@ -1,9 +1,10 @@
 const mongoose = require('mongoose'); 
+const dotenv = require('dotenv'); 
+dotenv.config({path: './config.env'});
 
 const dbConnect = async ()=> {
-    const MONGODB_LOCAL = 'mongodb://localhost:27017/notesApp'; 
     try {
-        await mongoose.connect(MONGODB_LOCAL, {
+        await mongoose.connect(process.env.MONGO_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
